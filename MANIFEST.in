@@ -1,6 +1,10 @@
-include LICENSE README
-recursive-include articles *.py *.html *.js
-recursive-include docs/ *
+include INSTALL.md LICENSE README.md
 recursive-include articles/fixtures/ *
 recursive-include articles/static/ *
-recursive-include articles/templates/ *
+recursive-include articles/templates/all_content/ *
+recursive-include articles/templates/articles/ *
+recursive-include articles/templates/blogs/ *
+recursive-include articles/templates/blogs/includes *
+recursive-include contact_manager/fixtures/ *
+recursive-include contact_manager/templates/contact/ *
+recursive-include docs/ *

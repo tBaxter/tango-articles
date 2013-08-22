@@ -10,7 +10,6 @@ setup(
     version='0.2',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
-    packages=['articles'],
     url='http://github.com/tBaxter/tango-articles',
     license='LICENSE.txt',
     description='Reusable Django articles/blog content app. Can be used with or without Tango.',
