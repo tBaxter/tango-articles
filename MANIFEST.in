@@ -1,5 +1,6 @@
-include AUTHORS CHANGES README INSTALL LICENCE
+include LICENSE README
 recursive-include articles *.py *.html *.js
-
-include docs/ *
-recursive-include docs/source *
+recursive-include docs/ *
+recursive-include articles/fixtures/ *
+recursive-include articles/static/ *
+recursive-include articles/templates/ *
