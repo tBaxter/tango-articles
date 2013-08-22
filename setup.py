@@ -18,6 +18,6 @@ setup(
     packages=find_packages(),
     install_requires=required,
     zip_safe=False,
-    include_package_data=True
+    include_package_data=True,
     dependency_links = ['http://github.com/tBaxter/tango-shared-core/tarball/master#egg=tango_shared-0.2']
 )
