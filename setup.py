@@ -18,5 +18,5 @@ setup(
     install_requires=required,
     zip_safe=False,
     include_package_data=True,
-    dependency_links = ['http://github.com/tBaxter/tango-shared-core/tarball/master#egg=tango-shared-0.2']
+    dependency_links = ['http://github.com/tBaxter/tango-shared-core/tarball/master#egg=tango-shared-0.3']
 )
