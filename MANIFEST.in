@@ -1,10 +1,5 @@
-include INSTALL.md LICENSE README.md
-recursive-include articles/fixtures/ *
-recursive-include articles/static/ *
-recursive-include articles/templates/all_content/ *
-recursive-include articles/templates/articles/ *
-recursive-include articles/templates/blogs/ *
-recursive-include articles/templates/blogs/includes *
-recursive-include contact_manager/fixtures/ *
-recursive-include contact_manager/templates/contact/ *
-recursive-include docs/ *
+include LICENSE README.md
+recursive-include articles *.html
+recursive-include articles *.js
+recursive-include articles *.json
+recursive-include docs *.txt
