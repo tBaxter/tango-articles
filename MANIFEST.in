@@ -1,5 +1,4 @@
 include LICENSE README.md
 recursive-include articles *.html
-recursive-include articles *.js
 recursive-include articles *.json
 recursive-include docs *.txt
