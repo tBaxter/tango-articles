@@ -11,5 +11,5 @@ Tango-Articles is a reusable app for news articles and blogs. While it forms a k
 tango_shared is a dependency. It will be installed. 
 
 ## Usage:
-   add 'articles' and 'tango_shared' to your installed apps, then run syncdb or South.
+Add 'articles' and 'tango_shared' to your installed apps, then run syncdb or migrate.
 
