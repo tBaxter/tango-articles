@@ -1,5 +1,5 @@
 {% extends "all_content/base.html" %}
-{% load markup typogrify_tags cache social_tags site_tags %}
+{% load typogrify_tags cache social_tags site_tags %}
 
 {% block title %}{{ object.title }}: {% endblock %}
 {% block extra_title %}{{ destination }}{% endblock %}
@@ -69,7 +69,7 @@
         {% endif %}
 
         {% block article_body %}
-          {% firstof object.autotag_body|markdown|urlize|typogrify object.body|markdown|typogrify %}
+          {% firstof object.autotag_body|urlize|typogrify object.body_formatted|typogrify %}
         {% endblock %}
 
         {% block endnote %}
@@ -96,7 +96,7 @@
             {% if sidebar.headline %}
               <h3>{{sidebar.headline }}</h3>
             {% endif %}
-            {{ sidebar.body|safe|urlize|markdown|typogrify }}
+            {{ sidebar.body_formatted|typogrify }}
           </aside>
         {% endfor %}
 

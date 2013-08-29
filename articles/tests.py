@@ -24,6 +24,9 @@ class TestArticleViews(TestCase):
         obj = response.context['object']
         self.assertIsInstance(obj, Article)
 
+        #ensure formatted body is available
+        self.assertNotEqual(obj.body_formatted, '')
+
     def test_article_list(self):
         """
         Test article list

@@ -11,6 +11,7 @@ from .managers import DestinationManager, BlogManager, ArticlesManager, Publishe
 from .signals import auto_tweet
 
 from tango_shared.models import ContentImage, BaseContentModel
+from tango_shared.utils.sanetize import sanetize_text
 
 ########## CONFIG ###########
 
@@ -114,6 +115,7 @@ class Article(BaseContentModel):
         help_text="""If the author is not on staff, enter their name."""
     )
     body = models.TextField()
+    body_formatted = models.TextField(blank=True, editable=False)
     pull_quote = models.TextField(blank=True)
     endnote = models.TextField(blank=True, null=True, help_text="A short note after the body.")
 
@@ -157,6 +159,11 @@ class Article(BaseContentModel):
 
     @models.permalink
     def get_absolute_url(self):
+        """
+        If override_url was given, use that.
+        Otherwise, if the content belongs to a blog, use a blog url.
+        If not, use a regular article url.
+        """
         if self.override_url:
             return self.override_url
         if self.destination.is_blog:
@@ -164,8 +171,13 @@ class Article(BaseContentModel):
         return ('article_detail', [self.slug])
 
     def save(self, *args, **kwargs):
+        """
+        Store summary if none was given
+        and created formatted version of body text.
+        """
         if not self.summary:
             self.summary = truncatewords(self.body, 50)
+        self.body_formatted = sanetize_text(self.body)
         super(Article, self).save()
 
     def get_top_assets(self):
@@ -188,7 +200,7 @@ class Article(BaseContentModel):
         See utils.autotag_content import autotag for details.
         """
         if supports_autotagging:
-            return autotag(self, self.body)
+            return autotag(self, self.body_formatted)
         return self.body
 
     def get_comment_count(self):
@@ -204,7 +216,14 @@ class Sidebar(models.Model):
     article   = models.ForeignKey(Article, related_name="related_sidebars")
     headline  = models.CharField(max_length=200, blank=True)
     body      = models.TextField()
+    body_formatted = models.TextField(blank=True, editable=False)
 
+    def save(self, *args, **kwargs):
+        """
+        Store created formatted version of body text.
+        """
+        self.body_formatted = sanetize_text(self.body)
+        super(Sidebar, self).save()
 
 class Brief(models.Model):
     text = models.TextField(help_text="Limit yourself to 140 characters for Twitter integration")

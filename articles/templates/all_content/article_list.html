@@ -1,5 +1,5 @@
 {% extends "all_content/base.html" %}
-{% load cache typogrify_tags markup site_tags %}
+{% load cache typogrify_tags site_tags %}
 
 {% block extra_title %}
   {{ destination }}
@@ -43,13 +43,9 @@
                   {% format_time a.created %}
 
                   {% if main_image %}
-                    {% if main_image.is_vertical %}
-                      {% firstof a.summary a.body|safe|markdown|truncatewords:"50" %}
-                    {% else %}
-                      {% firstof a.summary a.body|safe|markdown|truncatewords:"25" %}
-                    {% endif %}
+                      {{ a.summary }}
                   {% else %}
-                    {{ a.body|safe|markdown|truncatewords:"120" }}
+                    {{ a.body_formatted|truncatewords:"120" }}
                   {% endif %}
                 </section>
               {% endwith %}
