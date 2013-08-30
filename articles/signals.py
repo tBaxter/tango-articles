@@ -1,7 +1,4 @@
-try:
-    import twitter
-except:
-    pass
+import twitter
 
 from django.conf import settings
 
@@ -20,7 +17,7 @@ def auto_tweet(sender, instance, *args, **kwargs):
     """
 
     if not twitter or getattr(settings, 'TWITTER_SETTINGS') is False:
-        print 'WARNING: Twitter account not configured.'
+        #print 'WARNING: Twitter account not configured.'
         return False
 
     if not kwargs.get('created'):
@@ -35,10 +32,9 @@ def auto_tweet(sender, instance, *args, **kwargs):
             access_token_key    = twitter_key['access_token_key'],
             access_token_secret = twitter_key['access_token_secret']
         )
-    except Exception, inst:
-        print "failed to authenticate: %s" % (inst)
+    except Exception as error:
+        print "failed to authenticate: {}".format(error)
 
-    #print 'authenticated with twitter'
     text = instance.text
 
     if instance.link:
@@ -50,5 +46,5 @@ def auto_tweet(sender, instance, *args, **kwargs):
 
     try:
         api.PostUpdate(text)
-    except Exception, inst:
-        print "Error posting to twitter: %s" % inst
+    except Exception as error:
+        print "Error posting to twitter: {}".format(error)

@@ -4,6 +4,7 @@ import time
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -202,7 +203,7 @@ def process_upload(photo_list, form, parent_object, user, status=''):
             status += "Found jpg. Attempting to save... <br>"
             try:
                 dupe = ArticleImage.objects.get(photo__contains=upload_name, article=parent_object)
-            except:
+            except ObjectDoesNotExist:
                 dupe = None
             if not dupe:
                 try:
@@ -212,7 +213,7 @@ def process_upload(photo_list, form, parent_object, user, status=''):
                     )
                     upload.save()
                     status += "Saved and uploaded jpg."
-                except Exception, inst:
-                    status += "Error saving image: %s" % (inst)
+                except Exception as error:
+                    status += "Error saving image: {}".format(error)
         time.sleep(1)
     return status
