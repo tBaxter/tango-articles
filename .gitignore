@@ -2,3 +2,15 @@
 .DS_Store
 
 *.pyc
+
+tango_articles.egg-info/PKG-INFO
+
+tango_articles.egg-info/SOURCES.txt
+
+tango_articles.egg-info/dependency_links.txt
+
+tango_articles.egg-info/not-zip-safe
+
+tango_articles.egg-info/requires.txt
+
+tango_articles.egg-info/top_level.txt
