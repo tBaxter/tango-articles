@@ -46,7 +46,6 @@ class ArticleAdmin(admin.ModelAdmin):
         related[1]['fields'].insert(0, 'polls')
 
     fieldsets = (
-        ('Routing', {'fields': ('destination', 'sections')}),
         ('Author info', {'fields': (('author', 'guest_author'))}),
         ('Header', {'fields': ('overline', 'title', 'subhead')}),
         ('Content', {'fields': ('summary', 'body', 'pull_quote', 'endnote')}),
@@ -55,6 +54,7 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('slug', 'enable_comments', 'sites', 'override_url'),
             'classes': ['collapse']
         }),
+        ('Routing', {'fields': ('destination', 'sections')}),
         related,
         ('Meta',     {
             'fields': (('publication'), 'featured'),
