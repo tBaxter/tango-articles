@@ -198,7 +198,7 @@ def process_upload(photo_list, form, parent_object, user, status=''):
         upload_file.name = upload_file.name.lower().replace(' ', '_')
         upload_name = upload_file.name
 
-        status += "File is %s. Checking for single file upload or bulk upload... <br>" % upload_name
+        status += "File is {}. Checking for single file upload or bulk upload... <br>".format(upload_name)
         if upload_name.endswith('.jpg') or upload_name.endswith('.jpeg'):
             status += "Found jpg. Attempting to save... <br>"
             try:

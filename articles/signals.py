@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import twitter
 
 from django.conf import settings
@@ -33,7 +35,7 @@ def auto_tweet(sender, instance, *args, **kwargs):
             access_token_secret = twitter_key['access_token_secret']
         )
     except Exception as error:
-        print "failed to authenticate: {}".format(error)
+        print("failed to authenticate: {}".format(error))
 
     text = instance.text
 
@@ -42,9 +44,9 @@ def auto_tweet(sender, instance, *args, **kwargs):
     else:
         link = instance.get_absolute_url()
 
-    text = '%s %s' % (text, link)
+    text = '{} {}'.format(text, link)
 
     try:
         api.PostUpdate(text)
     except Exception as error:
-        print "Error posting to twitter: {}".format(error)
+        print("Error posting to twitter: {}".format(error))
