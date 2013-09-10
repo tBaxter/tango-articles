@@ -6,3 +6,4 @@ easy-thumbnails>=1.3
 smartypants>=1.6.0.3
 typogrify>=2.0.0
 tango-shared>=0.5
+twitter>=1.10.0
