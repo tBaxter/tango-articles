@@ -135,7 +135,7 @@ class Article(BaseContentModel):
     sections        = models.ManyToManyField(Category, blank=True, null=True)
     articles        = models.ManyToManyField('self', related_name="related_articles", blank=True, null=True, limit_choices_to={'publication': 'Published'})
 
-    if supports_video:
+    if 'video' in settings.INSTALLED_APPS:
         videos = generic.GenericRelation('video.Video')
     if supports_polls:
         polls = models.ManyToManyField('polls.Poll', blank=True, null=True)
@@ -190,7 +190,7 @@ class Article(BaseContentModel):
 
     def get_image(self):
         try:
-            return self.articleimage_set.all()[0].image
+            return self.articleimage_set.all()[0]
         except IndexError:
             return None
 

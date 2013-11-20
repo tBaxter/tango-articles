@@ -94,19 +94,13 @@
       </article> 
     {% endfor %}
   </div>
-
-  <div id="blog_side" class="touts">
-    {% block blog_side %}{% endblock %}
-  </div>
-
   {% include 'includes/generic_pagination.html' %}
 {% endblock %}
 
-{% block aside %}
+{% block destination_extras %}
   {% if authenticated_request and destination.author == user %}
       <p class="button icon-add">
         <a href="{% url 'blog_add_entry' destination.slug %}">Add an entry</a>
       </p>
   {% endif %}
-  {{ block.super }}
 {% endblock %}

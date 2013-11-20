@@ -22,7 +22,7 @@
 
 {% block content %}
   <article class="hentry">
-    {% cache 86400 'article' object.id object.last_modified 13 %}
+    {% cache 86400 'article' object.id object.last_modified 15 %}
       <header>
         {% with object.show_label as cat %}
           {% if cat %}
@@ -69,7 +69,7 @@
         {% endif %}
 
         {% block article_body %}
-          {% firstof object.autotag_body|urlize|typogrify object.body_formatted|typogrify %}
+          {% firstof object.autotag_body|safe|urlize|typogrify object.body_formatted|safe|typogrify %}
         {% endblock %}
 
         {% block endnote %}
@@ -77,15 +77,15 @@
             <p class="shirttail">{{ object.endnote|urlize }}</p>
           {% endif %}
         {% endblock %}
-
-        {% block socialize %}
-          <div id="social_bottom">
-            {% social_links object user %}
-          </div>
-        {% endblock %}
       </section><!-- /entry-content -->
 
-      <section id="article-extra-assets">
+      <section id="extra-assets">
+        {% if object.pull_quote %}
+          <blockquote class="pull-quote">
+            <p>{{object.pull_quote|typogrify }}</p>
+          </blockquote>
+        {% endif %}
+
         <! -- insert polls here -->
 
         {% for sidebar in object.related_sidebars.all|dictsort:'id' %}
@@ -156,10 +156,11 @@
             {% endif %}
           {% endwith %}
         {% endblock %}
-      </section><!-- /article-extra-assets -->
+      </section><!-- /extra-assets -->
     {% endcache %}
 
     <footer class="clear">
+      {% block socialize_bottom %}{% social_links object user %}{% endblock %}
       {% block comments %}
         {% include 'includes/comments/comments.html' %}
       {% endblock %}
@@ -167,10 +168,9 @@
   </article>
 {% endblock %}
 
-{% block aside %}
+{% block destination_extras %}
+  {{ block.super }}
   {% if destination.is_blog %}
     {% include "blogs/includes/blog_extras.html" %}
   {% endif %}
-
-  {{ block.super }}
 {% endblock %}

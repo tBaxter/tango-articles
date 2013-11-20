@@ -1,7 +1,8 @@
 from django.contrib import admin
 
+from .forms import BaseArticleForm
 from .models import ArticleImage, Sidebar, Destination, Category, Brief, Article
-from .models import supports_video, supports_polls, supports_galleries, NEWS_SOURCE
+from .models import supports_video, supports_polls, supports_galleries
 
 from tango_admin.admin import TextCounterWidget
 
@@ -20,8 +21,13 @@ class SidebarInline(admin.TabularInline):
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    form = BaseArticleForm
+
     class Media:
-        js = ('/static/js/admin/inline_reorder.js',)
+        js = (
+            '/static/admin/js/jquery-ui-1.10.3.custom-sortable.min.js',
+            '/static/admin/js/inline_reorder.js',
+        )
 
     ordering = ['-created']
     list_display = ('title', 'author', 'destination', 'created',)
@@ -60,7 +66,22 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': (('publication'), 'featured'),
             'description': 'Additional information about this story'
         }),
+        ('Bulk photo upload', {
+            'fields': ('upload',),
+            'description': "Upload multiple photos at once, if you don't want to handle them individually."
+        })
     )
+
+    def save_model(self, request, obj, form, change):
+        #return HttpResponse(request.FILES.getlist('upload'))
+        obj.save()
+        for img in request.FILES.getlist('upload'):
+            ArticleImage(
+                image = img,
+                article = obj
+            ).save()
+        obj.bulk_upload = None
+        obj.save()
 
 
 class BriefAdmin(admin.ModelAdmin):
