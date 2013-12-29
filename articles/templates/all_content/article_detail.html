@@ -21,8 +21,8 @@
 {% block bodyclass %}article-detail{% endblock %}
 
 {% block content %}
-  <article class="hentry">
-    {% cache 86400 'article' object.id object.last_modified 15 %}
+  <article class="hnews hentry item">
+    {% cache 86400 'article' object.id object.last_modified 1 %}
       <header>
         {% with object.show_label as cat %}
           {% if cat %}
@@ -53,8 +53,8 @@
         {% endif %}
       </header>
 
-      <section class="content-body">
-        {% format_time object.created %}
+      <section class="entry-content">
+        {% format_time object.created None False None 'published' %}
 
         {% block top_assets %}
           {% with object.get_top_assets as top_assets %}
@@ -64,10 +64,12 @@
           {% endwith %}
         {% endblock %}
 
+        {# if dateline is available, output it #}
         {% if object.dateline %}
           <span class="dateline">{{ object.dateline }}</span>
         {% endif %}
 
+        {# output body. Try autotagged first, then formatted #}
         {% block article_body %}
           {% firstof object.autotag_body|safe|urlize|typogrify object.body_formatted|safe|typogrify %}
         {% endblock %}
@@ -161,11 +163,17 @@
 
     <footer class="clear">
       {% block socialize_bottom %}{% social_links object user %}{% endblock %}
-      {% block comments %}
-        {% include 'includes/comments/comments.html' %}
-      {% endblock %}
+      {% if object.source %}
+        <div class="source-org vcard copyright">
+          &copy; {{ object.created.year }} <span class="org fn">{{ object.source }}</span>
+        </div>
+      {% endif %}
+      <small> Last updated {% format_time object.last_modified None False None 'updated' %}</small>
     </footer>
   </article>
+  {% block comments %}
+    {% include 'includes/comments/comments.html' %}
+  {% endblock %}
 {% endblock %}
 
 {% block destination_extras %}

@@ -1,9 +1,2 @@
-Django>=1.5.1
-Markdown>=2.3.1
-Pillow>=2.1.0
-docutils>=0.10
-easy-thumbnails>=1.3
-smartypants>=1.6.0.3
-typogrify>=2.0.0
-tango-shared>=0.5
 python-twitter>=1.1
+tango-shared>=0.6

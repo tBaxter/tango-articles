@@ -1,3 +1,9 @@
+# Tango Articles Change Log
+
+## 0.4.1
+* Removed requirements satisfied by tango-shared
+* Improved hnew microformatting in article details
+
 ### 0.4
 * Drag and drop ordering of article images
 * Bulk photo uploading
