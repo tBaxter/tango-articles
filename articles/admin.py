@@ -92,8 +92,11 @@ class BriefAdmin(admin.ModelAdmin):
             kwargs['widget'] = TextCounterWidget()
         return super(BriefAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
+class DestinationAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
 
-admin.site.register(Destination)
+
+admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Category)
 admin.site.register(Brief, BriefAdmin)
 admin.site.register(Article, ArticleAdmin)

@@ -45,7 +45,7 @@
                   {% if main_image %}
                       {{ a.summary }}
                   {% else %}
-                    {{ a.body_formatted|truncatewords:"120" }}
+                    {{ a.body_formatted|safe|truncatewords:"120" }}
                   {% endif %}
                 </section>
               {% endwith %}

@@ -9,7 +9,7 @@
     {% for obj in object_list %}
       <a href="{{ obj.get_absolute_url }}" class="breakout">
         <h1>{{ obj.title }}</h1>
-        <p>{{ obj.summary }}</p>
+        <p>{{ obj.summary|safe }}</p>
       </a>
     {% endfor %}
   </div>
