@@ -44,6 +44,7 @@ Briefs are short bits of news that either don't merit a full article or are bein
 
 ## Destinations
 Destinations allow you to define different publications within in the site. You will need at least one destination.
+
 - Destinations must have a title
 - slug will be filled in automatically from the title
 - Summary is optional. It allows you to describe the destination.
