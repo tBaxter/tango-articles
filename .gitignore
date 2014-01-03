@@ -16,3 +16,7 @@ tango_articles.egg-info/requires.txt
 tango_articles.egg-info/top_level.txt
 
 dist/tango-articles-0.4.tar.gz
+
+dist/tango-articles-0.4.1.tar.gz
+
+*.gz
