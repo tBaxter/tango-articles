@@ -1,2 +1,2 @@
 python-twitter>=1.1
-tango-shared>=0.6
+tango-shared-core>=0.6

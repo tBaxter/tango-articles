@@ -1,7 +1,7 @@
-import datetime
 from itertools import chain
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.db import models
@@ -32,14 +32,9 @@ PUBLICATION_CHOICES = (
     ('Proofed', 'Proofed'),
     ('Published', 'Published'),
 )
-now = datetime.datetime.now()
-offset = datetime.date.today() - datetime.timedelta(days=90)
-
-UserModel = getattr(settings, "AUTH_USER_MODEL", "auth.User")
 
 # News site settings.
 NEWS_SOURCE = getattr(settings, 'NEWS_SOURCE', False)
-
 
 ########## END CONFIG ###########
 
@@ -57,8 +52,8 @@ class Destination(models.Model):
     title   = models.CharField(max_length=200)
     summary = models.TextField(blank=True)
     slug    = models.SlugField(max_length=200, blank=True, null=True, unique=True)
-    author  = models.ForeignKey(UserModel, limit_choices_to = {'is_active': True, 'groups__name': 'Blogger'}, blank=True, null=True)
-    icon    = models.ImageField(upload_to="img/content/icons/", blank=True, help_text="If this is not a personal blog, please provide a representative image")
+    author  = models.ForeignKey(get_user_model(), limit_choices_to = {'is_active': True, 'groups__name': 'Blogger'}, blank=True, null=True)
+    icon    = models.ImageField(upload_to="img/content/icons/", blank=True, help_text="If this is not a personal blog, provide a representative image")
     active  = models.BooleanField(default=True)
     is_blog = models.BooleanField(default=True)
 
@@ -103,7 +98,7 @@ class Category(models.Model):
 
 class Article(BaseContentModel):
     author = models.ForeignKey(
-        UserModel,
+        get_user_model(),
         limit_choices_to={'is_staff': True},
         blank=True,
         null=True,
