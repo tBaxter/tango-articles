@@ -1,4 +1,3 @@
-import datetime
 import time
 
 from django.conf import settings
@@ -16,7 +15,6 @@ from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from .models import Article, ArticleImage, Destination
 from .forms import BlogEntryForm, BlogEntryImageForm
 
-now = datetime.datetime.now()
 pagination_setting = getattr(settings, "PAGINATE_BY", 25)
 
 

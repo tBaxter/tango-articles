@@ -1,5 +1,10 @@
 # Tango Articles Change Log
 
+## 0.5 
+* No more calls to markup
+* Improved how-to documentation
+* Removed redundant dependencies
+
 ## 0.4.1
 * Removed requirements satisfied by tango-shared
 * Improved hnew microformatting in article details

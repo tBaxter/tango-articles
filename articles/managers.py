@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import models
 
 RESTRICT_CONTENT_TO_SITE = getattr(settings, 'RESTRICT_CONTENT_TO_SITE', False)
-now = datetime.datetime.now()
 
 
 class DestinationManager(models.Manager):
@@ -50,5 +49,6 @@ class PublishedArticlesManager(ArticlesManager):
     """
     def get_query_set(self):
         articles = super(PublishedArticlesManager, self).get_query_set()
+        now = datetime.datetime.utcnow()
         articles.filter(destination__active=True, publication='Published', created__lte=now)
         return articles
