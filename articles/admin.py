@@ -73,7 +73,6 @@ class ArticleAdmin(admin.ModelAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        #return HttpResponse(request.FILES.getlist('upload'))
         obj.save()
         for img in request.FILES.getlist('upload'):
             ArticleImage(
@@ -91,6 +90,7 @@ class BriefAdmin(admin.ModelAdmin):
         if db_field.name == 'text':
             kwargs['widget'] = TextCounterWidget()
         return super(BriefAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+
 
 class DestinationAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}

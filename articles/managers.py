@@ -49,6 +49,6 @@ class PublishedArticlesManager(ArticlesManager):
     """
     def get_query_set(self):
         articles = super(PublishedArticlesManager, self).get_query_set()
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now()
         articles.filter(destination__active=True, publication='Published', created__lte=now)
         return articles

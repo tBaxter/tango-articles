@@ -10,7 +10,7 @@ from django.template.defaultfilters import truncatewords
 from .managers import DestinationManager, BlogManager, ArticlesManager, PublishedArticlesManager
 from .signals import auto_tweet
 
-from tango_shared.models import ContentImage, BaseContentModel
+from tango_shared.models import ContentImage, BaseContentModel, BaseSidebarContentModel
 from tango_shared.utils.sanetize import sanetize_text
 
 ########## CONFIG ###########
@@ -130,7 +130,7 @@ class Article(BaseContentModel):
     sections        = models.ManyToManyField(Category, blank=True, null=True)
     articles        = models.ManyToManyField('self', related_name="related_articles", blank=True, null=True, limit_choices_to={'publication': 'Published'})
 
-    if 'video' in settings.INSTALLED_APPS:
+    if supports_video:
         videos = generic.GenericRelation('video.Video')
     if supports_polls:
         polls = models.ManyToManyField('polls.Poll', blank=True, null=True)
@@ -145,9 +145,6 @@ class Article(BaseContentModel):
     # Managers
     objects   = ArticlesManager()
     published = PublishedArticlesManager()
-
-    class Meta:
-        ordering = ['-created']
 
     def __unicode__(self):
         return self.title
@@ -200,25 +197,15 @@ class Article(BaseContentModel):
 
     def get_comment_count(self):
         from django.contrib.contenttypes.models import ContentType
-        from django.contrib.comments.models import Comment
+        from tango_comments.models import Comment
         ctype = ContentType.objects.get(name__exact='article')
         num_comments = Comment.objects.filter(content_type=ctype.id, object_pk=self.id).count()
         return num_comments
 
 
-class Sidebar(models.Model):
-    # TO-DO: make sidebars separate content or not. see happenings.
+class Sidebar(BaseSidebarContentModel):
     article   = models.ForeignKey(Article, related_name="related_sidebars")
-    headline  = models.CharField(max_length=200, blank=True)
-    body      = models.TextField()
-    body_formatted = models.TextField(blank=True, editable=False)
 
-    def save(self, *args, **kwargs):
-        """
-        Store created formatted version of body text.
-        """
-        self.body_formatted = sanetize_text(self.body)
-        super(Sidebar, self).save()
 
 class Brief(models.Model):
     text = models.TextField(help_text="Limit yourself to 140 characters for Twitter integration")

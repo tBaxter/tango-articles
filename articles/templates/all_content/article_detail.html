@@ -1,15 +1,20 @@
 {% extends "all_content/base.html" %}
-{% load typogrify_tags cache social_tags site_tags %}
+
+{% load typogrify_tags cache social_tags tango_site_tags %}
 
 {% block title %}{{ object.title }}: {% endblock %}
+
 {% block extra_title %}{{ destination }}{% endblock %}
 
-{% block description %}{{ object.title }}: {{ object.summary }} | {{ site.name }} {{ destination }}{% endblock description %}
+{% block description %}{{ object.title }}: {{ object.summary }} | {{ site.name }} {{ destination }}
+{% endblock description %}
 
 {% block extra_meta %}
   <meta property="og:title" content="{% if object.kicker %}{{ object.kicker }}: {% endif %}{{ object.headline }}">
   <meta property="og:url" content="http://{{ site.domain }}{{ object.get_absolute_url }}">
-  {% if object.has_image %}<meta property="og:image" content="http://{{ site.domain }}{{ MEDIA_URL }}{{ object.get_image.image }}">{% endif %}
+  {% if object.has_image %}
+    <meta property="og:image" content="http://{{ site.domain }}{{ object.get_image.image.url }}">
+  {% endif %}
   <meta property="og:description" content="{{ object.summary }}">
   <meta property="og:type" content="article">
   <meta property="article:section" content="{{ object.get_section }}">
@@ -54,7 +59,7 @@
       </header>
 
       <section class="entry-content">
-        {% format_time object.created None False None 'published' %}
+        {% format_time date_obj=object.created None False None 'published' %}
 
         {% block top_assets %}
           {% with object.get_top_assets as top_assets %}
@@ -84,7 +89,7 @@
       <section id="extra-assets">
         {% if object.pull_quote %}
           <blockquote class="pull-quote">
-            <p>{{object.pull_quote|typogrify }}</p>
+            <p>{{ object.pull_quote|typogrify }}</p>
           </blockquote>
         {% endif %}
 
@@ -169,6 +174,7 @@
         </div>
       {% endif %}
       <small> Last updated {% format_time object.last_modified None False None 'updated' %}</small>
+
     </footer>
   </article>
   {% block comments %}
