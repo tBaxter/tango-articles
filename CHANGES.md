@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.5.1
+* Corrected bad template tag in article detail
+
 ## 0.5 
 * No more calls to markup
 * Improved how-to documentation
