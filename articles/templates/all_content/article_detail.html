@@ -59,7 +59,8 @@
       </header>
 
       <section class="entry-content">
-        {% format_time date_obj=object.created None False None 'published' %}
+        {# date object, time object, datebox, dt_type, classes #}
+        {% format_time object.created None False None 'published' %}
 
         {% block top_assets %}
           {% with object.get_top_assets as top_assets %}
