@@ -37,7 +37,7 @@ class ArticleList(ListView):
     destination = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.destination_slug = kwargs.get('destination_slug', None)
+        self.destination_slug = kwargs.get('destination_slug', 'articles')
         if self.destination_slug:
             self.destination = Destination.objects.get(slug=self.destination_slug)
         return super(ArticleList, self).dispatch(request, *args, **kwargs)

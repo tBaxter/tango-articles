@@ -1,5 +1,9 @@
 # Tango Articles Change Log
 
+## 0.5.2
+* Articles list now defaults to destination_slug 'articles', so the url /articles/ or /news/ returns all articles with the destination 'articles' (assuming no more specific destination is wanted)
+
+
 ## 0.5.1
 * Corrected bad template tag in article detail
 
