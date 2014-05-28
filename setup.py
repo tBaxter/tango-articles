@@ -7,7 +7,7 @@ with open('docs/requirements.txt') as f:
 
 setup(
     name='tango-articles',
-    version='0.5.2',
+    version='0.5.3',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     url='http://github.com/tBaxter/tango-articles',
@@ -18,5 +18,4 @@ setup(
     install_requires=required,
     zip_safe=False,
     include_package_data=True,
-    dependency_links = ['http://github.com/tBaxter/tango-shared-core/tarball/master#egg=tango-shared-0.6']
 )

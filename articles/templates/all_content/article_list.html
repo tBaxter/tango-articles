@@ -32,9 +32,9 @@
               {% with a.get_image as main_image %}
                 {% if main_image %}
                   {% if main_image.is_vertical %}
-                    <figure class="vertical" data-deferred-load="{{ MEDIA_URL }}{{ main_image.t_360u }}">
+                    <figure class="vertical" data-deferred-load="{{ MEDIA_URL }}{{ main_image.image.t_360u }}">
                   {% else %}
-                    <figure data-deferred-load="{{ MEDIA_URL }}{{ main_image.t_640 }}">
+                    <figure data-deferred-load="{{ MEDIA_URL }}{{ main_image.image.t_640 }}">
                   {% endif %}
                       <figcaption>{{ main_image.caption }}</figcaption>
                     </figure>
@@ -59,7 +59,7 @@
             {% endif %}
             <a href="{{ a.get_absolute_url }}">
               {% if a.get_image %}
-                <figure data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.t_180u }}" class="right"></figure>
+                <figure data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.image.t_180u }}" class="right"></figure>
               {% endif %}
               <h1>{{ a.title|typogrify }}</h1>
               <p>{{ a.summary|truncatewords:"25" }}</p>
@@ -79,7 +79,7 @@
         {% endif %}
         <a href="{{ a.get_absolute_url }}">
           {% if a.get_image %}
-            <figure class="right" data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.t_180u }}"></figure>
+            <figure class="right" data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.image.t_180u }}"></figure>
           {% endif %}
           <header>
             <h1>{{ a.title }}</h1>
