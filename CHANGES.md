@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.5.4
+* Comment recovery
+
 ## 0.5.3
 * Articles list images resolve correctly
 

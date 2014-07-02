@@ -111,7 +111,7 @@ def edit_entry(request, blog_slug, object_id):
         entry = Article.objects.get(id=object_id)
         entry.body = request.POST['body']
         entry.save()
-        return HttpResponse(str(entry.body))
+        return HttpResponse(unicode(entry.body))
     return UpdateView(
         form_class=BlogEntryForm,
         object_id=object_id,
