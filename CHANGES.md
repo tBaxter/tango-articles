@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.6.0
+* Stubbed base URLs
+
 ## 0.5.4
 * Comment recovery
 
