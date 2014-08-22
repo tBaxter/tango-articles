@@ -1,5 +1,9 @@
 # Tango Articles Change Log
 
+## 0.7.0
+* Updates for Django 1.7
+* Moved admin media definitions out. Now supported by tango-admin.
+
 ## 0.6.0
 * Stubbed base URLs
 
@@ -15,7 +19,7 @@
 ## 0.5.1
 * Corrected bad template tag in article detail
 
-## 0.5 
+## 0.5
 * No more calls to markup
 * Improved how-to documentation
 * Removed redundant dependencies

@@ -1,7 +1,6 @@
 from itertools import chain
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 from django.db import models
@@ -52,7 +51,7 @@ class Destination(models.Model):
     title   = models.CharField(max_length=200)
     summary = models.TextField(blank=True)
     slug    = models.SlugField(max_length=200, blank=True, null=True, unique=True)
-    author  = models.ForeignKey(get_user_model(), limit_choices_to = {'is_active': True, 'groups__name': 'Blogger'}, blank=True, null=True)
+    author  = models.ForeignKey(settings.AUTH_USER_MODEL, limit_choices_to = {'is_active': True, 'groups__name': 'Blogger'}, blank=True, null=True)
     icon    = models.ImageField(upload_to="img/content/icons/", blank=True, help_text="If this is not a personal blog, provide a representative image")
     active  = models.BooleanField(default=True)
     is_blog = models.BooleanField(default=True)
@@ -98,7 +97,7 @@ class Category(models.Model):
 
 class Article(BaseContentModel):
     author = models.ForeignKey(
-        get_user_model(),
+        settings.AUTH_USER_MODEL,
         limit_choices_to={'is_staff': True},
         blank=True,
         null=True,

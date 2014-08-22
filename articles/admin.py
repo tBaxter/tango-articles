@@ -23,12 +23,6 @@ class SidebarInline(admin.TabularInline):
 class ArticleAdmin(admin.ModelAdmin):
     form = BaseArticleForm
 
-    class Media:
-        js = (
-            '/static/admin/js/jquery-ui-1.10.3.custom-sortable.min.js',
-            '/static/admin/js/inline_reorder.js',
-        )
-
     ordering = ['-created']
     list_display = ('title', 'author', 'destination', 'created',)
     list_filter = ('created', 'last_modified', 'enable_comments', 'publication', 'destination')
