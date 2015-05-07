@@ -26,7 +26,7 @@
 {% block bodyclass %}article-detail{% endblock %}
 
 {% block content %}
-  <article class="hnews hentry item">
+  <article class="h-entry">
     {% cache 86400 'article' object.id object.last_modified 1 %}
       <header>
         {% with object.show_label as cat %}
@@ -39,18 +39,18 @@
         {% if object.kicker %}
           <h2 class="overline">{{ object.kicker|typogrify }}</h2>
         {% endif %}
-        <h1 class="entry-title">{{ object.title|typogrify }}</h1>
-        
+        <h1 class="entry-title p-name">{{ object.title|typogrify }}</h1>
+
         {% if object.subhead %}
           <h2 class="subhead">{{ object.subhead|typogrify }}</h2>
         {% endif %}
-        
-        <p class="author vcard{% if destination.is_blog %} hide{% endif %}">
+
+        <p class="author p-author h-card{% if destination.is_blog %} hide{% endif %}">
           <span class="email fn">
             {% firstof object.author.display_name object.guest_author %}
           </span>
         </p>
-        
+
         {% if object.source %}
           <p class="source-org vcard">
             <span class="org fn">{{ object.source }}</span>
@@ -58,7 +58,7 @@
         {% endif %}
       </header>
 
-      <section class="entry-content">
+      <section class="e-content">
         {# date object, time object, datebox, dt_type, classes #}
         {% format_time object.created None False None 'published' %}
 
@@ -118,7 +118,7 @@
                       {% firstof attached.filename 'Attachment' %}
                     </a>
                     <span class="meta">
-                      {{ attached.file.size|filesizeformat }} 
+                      {{ attached.file.size|filesizeformat }}
                       {{ attached.filetype }}
                     </span>
                   </li>
@@ -150,7 +150,7 @@
                 <p>{{ a.summary }}</p>
               </aside>
             {% endfor %}
-            
+
             {# then more general related (from the same section) #}
             {% if related.from_section %}
               <h3>More {{ object.get_section }}</h3>

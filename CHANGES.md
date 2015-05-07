@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.7.1
+* Updated h-entry microformat tags
+
 ## 0.7.0
 * Updates for Django 1.7
 * Moved admin media definitions out. Now supported by tango-admin.
