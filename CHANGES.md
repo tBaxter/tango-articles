@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.7.2
+* Minor changes for Django 1.8
+
 ## 0.7.1
 * Updated h-entry microformat tags
 

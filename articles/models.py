@@ -111,8 +111,11 @@ class Article(BaseContentModel):
     body = models.TextField()
     body_formatted = models.TextField(blank=True, editable=False)
     pull_quote = models.TextField(blank=True)
-    endnote = models.TextField(blank=True, null=True, help_text="A short note after the body.")
-
+    endnote = models.TextField(
+        blank=True,
+        null=True,
+        help_text="A short note after the body."
+    )
     override_url = models.URLField(
         blank=True,
         help_text="If this story is actaully published elsewhere, give the URL."
@@ -125,20 +128,34 @@ class Article(BaseContentModel):
     )
 
     # RELATIONSHIPS
-    destination     = models.ForeignKey(Destination)
-    sections        = models.ManyToManyField(Category, blank=True, null=True)
-    articles        = models.ManyToManyField('self', related_name="related_articles", blank=True, null=True, limit_choices_to={'publication': 'Published'})
+    destination = models.ForeignKey(Destination)
+    sections = models.ManyToManyField(Category, blank=True)
+    articles = models.ManyToManyField(
+        'self',
+        related_name="related_articles",
+        blank=True,
+        limit_choices_to={'publication': 'Published'}
+    )
 
     if supports_video:
         videos = generic.GenericRelation('video.Video')
     if supports_polls:
-        polls = models.ManyToManyField('polls.Poll', blank=True, null=True)
+        polls = models.ManyToManyField('polls.Poll', blank=True)
     if supports_galleries:
-        galleries = models.ManyToManyField('photos.Gallery', related_name="article_galleries", blank=True)
+        galleries = models.ManyToManyField(
+            'photos.Gallery',
+            related_name="article_galleries",
+            blank=True
+        )
 
     if NEWS_SOURCE:
         opinion  = models.BooleanField("Opinion/Editorial", default=False)
-        source   = models.CharField(max_length=200, default=NEWS_SOURCE, blank=True, null=True)
+        source   = models.CharField(
+            max_length=200,
+            default=NEWS_SOURCE,
+            blank=True,
+            null=True
+        )
         dateline = models.CharField(max_length=200, blank=True, null=True)
 
     # Managers
@@ -187,7 +204,7 @@ class Article(BaseContentModel):
 
     def autotag_body(self):
         """
-        Auto-inserts links for matching content and establishes M2M relationshiops.
+        Auto-inserts links for matching content and establishes M2M relationships.
         See utils.autotag_content import autotag for details.
         """
         if supports_autotagging:
