@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.8.1
+* Added classifiers to setup.py
+
 ## 0.8.0
 * Updates for Travis, Django 1.8 and Python 3
 

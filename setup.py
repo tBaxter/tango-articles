@@ -7,7 +7,7 @@ with open('docs/requirements.txt') as f:
 
 setup(
     name='tango-articles',
-    version='0.8.0',
+    version='0.8.1',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     url='http://github.com/tBaxter/tango-articles',
@@ -18,4 +18,14 @@ setup(
     install_requires=required,
     zip_safe=False,
     include_package_data=True,
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Environment :: Web Environment",
+        "Framework :: Django",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python",
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+    ],
 )
