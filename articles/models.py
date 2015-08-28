@@ -193,7 +193,12 @@ class Article(BaseContentModel):
         Returns chained list of top assets (photos and video) for commonized templates.
         """
         imgs = self.articleimage_set.all()
-        vids = self.videos.all()
+        try:
+            vids = self.videos.all()
+        except AttributeError:
+            # handles case where videos are not in installed apps
+            # or otherwise unavailable
+            vids = []
         return list(chain(imgs, vids))
 
     def get_image(self):
