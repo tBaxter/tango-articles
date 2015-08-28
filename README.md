@@ -1,9 +1,11 @@
 Tango Articles
 =====
 
+[![Build Status](https://travis-ci.org/tBaxter/tango-articles.svg?branch=master)](https://travis-ci.org/tBaxter/tango-articles)
+
 Tango Articles is a simple but robust reusable app for news articles and blogs entries. It can power anything from a simple blog to sophisticated full-featured news sites.
 
-While it forms a key component of Tango, it can also be dropped into an existing non-Tango project. 
+While it forms a key component of Tango, it can also be dropped into an existing non-Tango project.
 
 ## Key features
 * Have as many blogs as you like running one site.
@@ -13,17 +15,17 @@ While it forms a key component of Tango, it can also be dropped into an existing
 
 ##Installation:
 
-	pip install tango-articles
+    pip install tango-articles
 
 or
-    
+
     pip install git+https://github.com/tBaxter/tango-articles.git
 
 
 ## Usage:
 Add 'articles' and 'tango_shared' to your installed apps, then run syncdb or migrate.
 
-tango_shared will be installed for you. 
+tango_shared and [bindings for Twitter](https://github.com/sixohsix/twitter) will be installed for you.
 
 
 

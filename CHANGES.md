@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.8.0
+* Updates for Travis, Django 1.8 and Python 3
+
 ## 0.7.2
 * Minor changes for Django 1.8
 
