@@ -18,7 +18,7 @@ DATABASES = {
     }
 }
 
-ROOT_URLCONF = 'articles.urls'
+ROOT_URLCONF = 'articles.urls.article_urls'
 SITE_ID = 1
 
 #stripped down middleware

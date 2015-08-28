@@ -5,3 +5,4 @@ python:
 install:
   - "pip install -e . "
 script: django-admin.py test --settings=test_settings
+sudo: false
