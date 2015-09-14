@@ -7,7 +7,7 @@ with open('docs/requirements.txt') as f:
 
 setup(
     name='tango-articles',
-    version='0.8.1',
+    version='0.9.0',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     url='http://github.com/tBaxter/tango-articles',
@@ -27,5 +27,5 @@ setup(
         "Programming Language :: Python",
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
-    ],
+    ]
 )

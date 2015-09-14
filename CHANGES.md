@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.9.0
+* Added attachments to articles
+
 ## 0.8.1
 * Added classifiers to setup.py
 

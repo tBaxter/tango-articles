@@ -114,7 +114,7 @@
             <ul>
               {% for attached in object.attachment_set.all %}
                 <li>
-                    <a href="{{ MEDIA_URL }}/{{ attached.file.name }}">
+                    <a href="{{ attached.file.url }}">
                       {% firstof attached.filename 'Attachment' %}
                     </a>
                     <span class="meta">

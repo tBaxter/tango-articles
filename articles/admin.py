@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 from .forms import BaseArticleForm
-from .models import ArticleImage, Sidebar, Destination, Category, Brief, Article
+from .models import Article, Brief, Sidebar
+from .models import Destination, Category, Attachment, ArticleImage
 from .models import supports_video, supports_polls, supports_galleries
 
 from tango_admin.admin import TextCounterWidget
@@ -20,6 +21,10 @@ class SidebarInline(admin.TabularInline):
     extra = 2
 
 
+class AttachmentInline(admin.TabularInline):
+    model = Attachment
+
+
 class ArticleAdmin(admin.ModelAdmin):
     form = BaseArticleForm
 
@@ -32,6 +37,7 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = [
         ArticleImagesInline,
         SidebarInline,
+        AttachmentInline
     ]
     related = ('Related', {
         'fields': ['articles'],

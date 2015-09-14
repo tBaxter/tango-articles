@@ -228,6 +228,21 @@ class Sidebar(BaseSidebarContentModel):
     article   = models.ForeignKey(Article, related_name="related_sidebars")
 
 
+class Attachment(models.Model):
+    article = models.ForeignKey(Article)
+    filename = models.CharField(
+        max_length=200,
+        blank=True,
+        help_text="The visible name of the attachment"
+    )
+    attachment = models.FileField(upload_to='attachments/articles/')
+    filetype = models.CharField(max_length=4, editable=False)
+
+    def save(self):
+        self.filetype = self.file.name.split(".")[-1]
+        super(Attachment, self).save()
+
+
 class Brief(models.Model):
     text = models.TextField(help_text="Limit yourself to 140 characters for Twitter integration")
     pub_date = models.DateTimeField(auto_now_add=True)
