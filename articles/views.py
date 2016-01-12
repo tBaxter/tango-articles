@@ -82,8 +82,8 @@ class ArticleDetail(DetailView):
             except IndexError:
                 prev_update = None
             context.update({
-                'next_update' : next_update,
-                'prev_update' : prev_update
+                'next_update': next_update,
+                'prev_update': prev_update
             })
         return context
 article_detail = ArticleDetail.as_view()
@@ -152,12 +152,14 @@ class CreateBlogEntry(CreateView):
         self.obj.save()
         for upload_file in self.request.FILES.getlist('upload'):
             new_image = ArticleImage(
-                article = self.obj,
-                image = upload_file
+                article=self.obj,
+                image=upload_file
             )
             new_image.save()
         messages.success(self.request, 'Your entry has been added')
-        return HttpResponseRedirect(reverse('blog_entry_detail', args=(self.destination.slug, self.obj.slug)))
+        return HttpResponseRedirect(
+            reverse('blog_entry_detail', args=(self.destination.slug, self.obj.slug))
+        )
 
 
 class EditBlogEntry(UpdateView):
@@ -181,7 +183,9 @@ class EditBlogEntry(UpdateView):
         self.obj = form.save()
         process_upload(self.request.FILES.getlist('upload'), form, self.obj, self.request.user)
         messages.success(self.request, 'Your entry has been edited')
-        return HttpResponseRedirect(reverse('blog_entry_detail', args=(self.destination.slug, self.obj.slug)))
+        return HttpResponseRedirect(
+            reverse('blog_entry_detail', args=(self.destination.slug, self.obj.slug))
+        )
 
 
 def process_upload(photo_list, form, parent_object, user, status=''):
@@ -196,7 +200,10 @@ def process_upload(photo_list, form, parent_object, user, status=''):
         upload_file.name = upload_file.name.lower().replace(' ', '_')
         upload_name = upload_file.name
 
-        status += "File is {}. Checking for single file upload or bulk upload... <br>".format(upload_name)
+        status += """
+           File is {}.
+           Checking for single file upload or bulk upload... <br>
+           """.format(upload_name)
         if upload_name.endswith('.jpg') or upload_name.endswith('.jpeg'):
             status += "Found jpg. Attempting to save... <br>"
             try:
@@ -206,8 +213,8 @@ def process_upload(photo_list, form, parent_object, user, status=''):
             if not dupe:
                 try:
                     upload = ArticleImage(
-                        article = parent_object,
-                        photo = upload_file
+                        article=parent_object,
+                        photo=upload_file
                     )
                     upload.save()
                     status += "Saved and uploaded jpg."
