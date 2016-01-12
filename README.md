@@ -1,5 +1,5 @@
 Tango Articles
-=====
+==============
 
 [![Build Status](https://travis-ci.org/tBaxter/tango-articles.svg?branch=master)](https://travis-ci.org/tBaxter/tango-articles)
 
@@ -17,7 +17,7 @@ While it forms a key component of Tango, it can also be dropped into an existing
 
     pip install tango-articles
 
-or
+or install directly from github:
 
     pip install git+https://github.com/tBaxter/tango-articles.git
 
