@@ -5,11 +5,12 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.humanize',
     'django.contrib.sites',
+    'django.contrib.sessions',
 
     'tango_shared',
     'voting',
     'articles',
-    'typogrify' # installed by shared, keeps templates happy
+    'typogrify'  # installed by shared, keeps templates happy
 )
 
 DATABASES = {
@@ -20,6 +21,7 @@ DATABASES = {
 }
 
 ROOT_URLCONF = 'articles.urls.article_urls'
+
 SITE_ID = 1
 
 PAGINATE_BY = 20
