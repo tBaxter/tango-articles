@@ -6,7 +6,7 @@ from .models import Article
 
 
 class TestArticleViews(TestCase):
-    fixtures = ['authtestdata.json', 'articles.json']
+    fixtures = ['auth_users.json', 'articles.json']
 
     def test_settings(self):
         paginate_by = getattr(settings, "PAGINATE_BY", False)
