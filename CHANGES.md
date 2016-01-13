@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.10.0
+* Changes for Django 1.8+
+
 ## 0.9.0
 * Added attachments to articles
 
