@@ -1,5 +1,9 @@
 # Tango Articles Change Log
 
+
+## 0.10.1
+* Added check for presence of tango_admin
+
 ## 0.10.0
 * Changes for Django 1.8+
 

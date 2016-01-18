@@ -1,11 +1,10 @@
 from django.contrib import admin
+from django.conf import settings
 
 from .forms import BaseArticleForm
 from .models import Article, Brief, Sidebar
 from .models import Destination, Category, Attachment, ArticleImage
 from .models import supports_video, supports_polls, supports_galleries
-
-from tango_admin.admin import TextCounterWidget
 
 if supports_video:
     from video.admin import VideoInline
@@ -68,7 +67,7 @@ class ArticleAdmin(admin.ModelAdmin):
         }),
         ('Bulk photo upload', {
             'fields': ('upload',),
-            'description': "Upload multiple photos at once, if you don't want to handle them individually."
+            'description': "Upload multiple photos, if you don't want to handle them individually."
         })
     )
 
@@ -76,8 +75,8 @@ class ArticleAdmin(admin.ModelAdmin):
         obj.save()
         for img in request.FILES.getlist('upload'):
             ArticleImage(
-                image = img,
-                article = obj
+                image=img,
+                article=obj
             ).save()
         obj.bulk_upload = None
         obj.save()
@@ -87,7 +86,8 @@ class BriefAdmin(admin.ModelAdmin):
     list_display = ('pub_date', 'text')
 
     def formfield_for_dbfield(self, db_field, **kwargs):
-        if db_field.name == 'text':
+        if db_field.name == 'text' and 'tango_admin' in settings.INSTALLED_APPS:
+            from tango_admin.admin import TextCounterWidget
             kwargs['widget'] = TextCounterWidget()
         return super(BriefAdmin, self).formfield_for_dbfield(db_field, **kwargs)
 
