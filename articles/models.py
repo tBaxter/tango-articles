@@ -279,4 +279,23 @@ class ArticleImage(ContentImage):
 class SidebarImage(ContentImage):
     sidebar = models.ForeignKey(Sidebar)
 
+
+class LinkRoll(models.Model):
+    """
+    Defines a list of external links
+    """
+    name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Link(models.Model):
+    """
+    An individual link for a LinkRoll.
+    """
+    display_text = models.CharField(max_length=200)
+    url = models.URLField()
+    linkroll = models.ForeignKey(LinkRoll)
+
 models.signals.post_save.connect(auto_tweet, sender=Brief)

@@ -1,5 +1,7 @@
 # Tango Articles Change Log
 
+## 0.11.0
+* Recovered long-lost LinkRoll models.
 
 ## 0.10.1
 * Added check for presence of tango_admin
