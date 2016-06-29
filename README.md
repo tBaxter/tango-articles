@@ -24,6 +24,7 @@ or install directly from github:
 
 ## Usage:
 Add the following to your installed apps
+
     ```python
     INSTALLED_APPS = (
       # ...
@@ -32,6 +33,14 @@ Add the following to your installed apps
       'tango_shared',
       # ...
     )
+    ```
+
+Add a `SITE_ID` to your `settings.py`
+
+    ```python
+    # ...
+    SITE_ID = 1
+    # ...
     ```
 
 Then run `python manage.py syncdb` or `python manage.py makemigrations` and `python manage.py migrate`.
