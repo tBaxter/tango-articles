@@ -25,23 +25,23 @@ or install directly from github:
 ## Usage:
 Add the following to your installed apps
 
-    ```python
-    INSTALLED_APPS = (
-      # ...
-      'django.contrib.sites', # if not already present
-      'articles',
-      'tango_shared',
-      # ...
-    )
-    ```
+```python
+INSTALLED_APPS = (
+  # ...
+  'django.contrib.sites', # if not already present
+  'articles',
+  'tango_shared',
+  # ...
+)
+```
 
 Add a `SITE_ID` to your `settings.py`
 
-    ```python
-    # ...
-    SITE_ID = 1
-    # ...
-    ```
+```python
+# ...
+SITE_ID = 1
+# ...
+```
 
 Then run `python manage.py syncdb` or `python manage.py makemigrations` and `python manage.py migrate`.
 
