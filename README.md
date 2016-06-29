@@ -23,9 +23,20 @@ or install directly from github:
 
 
 ## Usage:
-Add 'articles' and 'tango_shared' to your installed apps, then run syncdb or migrate.
+Add the following to your installed apps
+    ```python
+    INSTALLED_APPS = (
+      # ...
+      'django.contrib.sites', # if not already present
+      'articles',
+      'tango_shared',
+      # ...
+    )
+    ```
 
-tango_shared and [bindings for Twitter](https://github.com/sixohsix/twitter) will be installed for you.
+Then run `python manage.py syncdb` or `python manage.py makemigrations` and `python manage.py migrate`.
+
+`tango_shared` and [bindings for Twitter](https://github.com/sixohsix/twitter) will be installed for you.
 
 
 
