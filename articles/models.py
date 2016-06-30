@@ -248,7 +248,7 @@ class Attachment(models.Model):
     filetype = models.CharField(max_length=4, editable=False)
 
     def save(self):
-        self.filetype = self.file.name.split(".")[-1]
+        self.filetype = self.attachment.name.split(".")[-1]
         super(Attachment, self).save()
 
 
