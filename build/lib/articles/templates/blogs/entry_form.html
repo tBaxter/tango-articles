@@ -1,0 +1,14 @@
+{% extends "all_content/base.html" %}
+
+{% block title %}Add entry: {% endblock title %}
+
+{% block content %}
+  <h1>Add or edit an entry</h1>
+  <form id="blog-entry" class="markitup-form boxedform" action="." enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p class="submit">
+      <input type="submit" value="Submit Entry">
+    </p>
+  </form>
+{% endblock %}

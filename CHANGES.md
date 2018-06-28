@@ -1,5 +1,14 @@
 # Tango Articles Change Log
 
+## 0.12.0
+* Adopted Django 2.0 URL syntax
+
+## 0.11.2
+* Additional on_delete arguments for 2.0 compatibilty
+
+## 0.11.1
+* Added on_delete argument for 2.0 compatibilty
+
 ## 0.11.0
 * Recovered long-lost LinkRoll models.
 

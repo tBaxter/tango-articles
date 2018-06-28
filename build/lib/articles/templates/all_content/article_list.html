@@ -1,0 +1,106 @@
+{% extends "all_content/base.html" %}
+{% load cache typogrify_tags tango_time_tags %}
+
+{% block extra_title %}
+  {{ destination }}
+  {% if is_paginated and page_obj.number != 1 %} 
+    page {{ page_obj.number }}
+  {% endif %}
+{% endblock %}
+
+{% block bodyclass %}section-front
+  {% if page_obj.number == 1 %} 
+    first-page
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {# To do: cache by destination, page (and maybe count within destination) #}
+   
+  {% include 'includes/generic_pagination.html' %}
+  
+  {% with object_list|slice:"0:4" as top_articles %}
+    <div id="top_stories_hold">
+      {% for a in top_articles %}
+        {% if forloop.first %}
+          <article id="lead_item">
+            {% if a.get_kicker and a.show_label.slug != slug %}
+              <h2 class="kicker">{{ a.get_kicker|safe }}</h2>
+            {% endif %}
+            <a href="{{ a.get_absolute_url }}">
+              <h1>{{ a.title|typogrify }}</h1>
+              {% with a.get_image as main_image %}
+                {% if main_image %}
+                  {% if main_image.is_vertical %}
+                    <figure class="vertical" data-deferred-load="{{ MEDIA_URL }}{{ main_image.image.t_360u }}">
+                  {% else %}
+                    <figure data-deferred-load="{{ MEDIA_URL }}{{ main_image.image.t_640 }}">
+                  {% endif %}
+                      <figcaption>{{ main_image.caption }}</figcaption>
+                    </figure>
+                {% endif %}
+                <section class="entry-body">
+                  {% format_time a.created %}
+
+                  {% if main_image %}
+                      {{ a.summary }}
+                  {% else %}
+                    {{ a.body_formatted|safe|truncatewords:"120" }}
+                  {% endif %}
+                </section>
+              {% endwith %}
+            </a>
+          </article>
+          <div id="more_featured">
+        {% else %}
+          <article>
+            {% if a.get_kicker and a.show_label.slug != slug %}
+              <h2 class="kicker">{{ a.get_kicker|safe }}</h2>
+            {% endif %}
+            <a href="{{ a.get_absolute_url }}">
+              {% if a.get_image %}
+                <figure data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.image.t_180u }}" class="right"></figure>
+              {% endif %}
+              <h1>{{ a.title|typogrify }}</h1>
+              <p>{{ a.summary|truncatewords:"25" }}</p>
+            </a>
+          </article>
+        {% endif %}
+      {% endfor %}
+      </div><!-- /more_featured -->
+    </div><!-- /top_stories_hold -->
+  {% endwith %}
+  <hr class="clear">
+  <div id="more_articles" class="clear columned divided two-col">
+    {% for a in object_list|slice:"4:" %}
+      <article>
+        {% if a.get_kicker and a.show_label.slug != slug %}
+          <h2 class="kicker meta">{{ a.get_kicker|safe }}</h2>
+        {% endif %}
+        <a href="{{ a.get_absolute_url }}">
+          {% if a.get_image %}
+            <figure class="right" data-deferred-load="{{ MEDIA_URL }}{{ a.get_image.image.t_180u }}"></figure>
+          {% endif %}
+          <header>
+            <h1>{{ a.title }}</h1>
+          </header>
+          
+          {% format_time a.created %}
+
+          <p>
+            {% firstof a.summary a.body|striptags|truncatewords:"60" %}
+          </p>
+        </a>
+      </article> 
+    {% endfor %}
+  </div>
+  {% include 'includes/generic_pagination.html' %}
+{% endblock %}
+
+{% block destination_extras %}
+  {% if authenticated_request and destination.author == user %}
+      <p class="button icon-add">
+        <a href="{% url 'blog_add_entry' destination.slug %}">Add an entry</a>
+      </p>
+  {% endif %}
+{% endblock %}
