@@ -4,7 +4,7 @@ from articles.models import Article, Brief
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_latest_articles(num, assignment_slug=None, brief=False, *args, **kwargs):
     """
     Takes a given number and assignment slug and returns a list.
@@ -22,7 +22,7 @@ def get_latest_articles(num, assignment_slug=None, brief=False, *args, **kwargs)
     return Article.published.all()[0:num]
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_new_articles(last_seen, assignment_slug=None, brief=False, *args, **kwargs):
     """
     Takes a 'last_seen' timestamp and assignment slug and returns a list.

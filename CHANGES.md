@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.12.2
+* Removed deprecated assignement_tag
+
 ## 0.12.1
 * Additional fixes for Django 2.0
 
