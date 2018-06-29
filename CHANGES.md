@@ -1,5 +1,8 @@
 # Tango Articles Change Log
 
+## 0.12.1
+* Additional fixes for Django 2.0
+
 ## 0.12.0
 * Adopted Django 2.0 URL syntax
 
