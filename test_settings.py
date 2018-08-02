@@ -11,7 +11,8 @@ INSTALLED_APPS = (
     'articles',
     # installed by shared, keeps templates happy
     'typogrify',
-    'easy_thumbnails'
+    'easy_thumbnails',
+    'django-voting'
 )
 
 DATABASES = {
