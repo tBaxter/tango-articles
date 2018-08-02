@@ -9,7 +9,9 @@ INSTALLED_APPS = (
 
     'tango_shared',
     'articles',
-    'typogrify'  # installed by shared, keeps templates happy
+    # installed by shared, keeps templates happy
+    'typogrify',
+    'easy_thumbnails'
 )
 
 DATABASES = {
