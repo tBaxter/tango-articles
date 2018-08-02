@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import path
 from django.views.generic import DetailView
 
 from articles.views import article_detail, article_list
