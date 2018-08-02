@@ -12,7 +12,8 @@ INSTALLED_APPS = (
     # installed by shared, keeps templates happy
     'typogrify',
     'easy_thumbnails',
-    'voting'
+    'voting',
+    'photos'
 )
 
 DATABASES = {
