@@ -8,7 +8,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
 
     'tango_shared',
-    'voting',
     'articles',
     'typogrify'  # installed by shared, keeps templates happy
 )
