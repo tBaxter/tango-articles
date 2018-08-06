@@ -8,7 +8,8 @@
       "summary": "",
       "active": true,
       "is_blog": false,
-      "slug": "articles", "icon": ""
+      "slug": "articles", 
+      "icon": ""
     }
   },
   {
@@ -37,8 +38,7 @@
       "destination": 1,
       "enable_comments": true,
       "sections": [],
-      "slug": "welcome-tango",
-      "published": true
+      "slug": "welcome-tango"
     }
   }
 ]

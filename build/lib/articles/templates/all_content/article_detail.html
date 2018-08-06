@@ -178,9 +178,12 @@
 
     </footer>
   </article>
-  {% block comments %}
-    {% include 'comments/inclusion/comments.html' %}
-  {% endblock %}
+  {% comment %}
+    # Feel free to uncomment this if you want comments.
+    {% block comments %}
+      {% include 'comments/inclusion/comments.html' %}
+    {% endblock %}
+  {% endcomment %}
 {% endblock %}
 
 {% block destination_extras %}

@@ -5,6 +5,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.defaultfilters import truncatewords
+from django.urls import reverse
 
 from .managers import DestinationManager, BlogManager, ArticlesManager, PublishedArticlesManager
 from .signals import auto_tweet
@@ -179,7 +180,6 @@ class Article(BaseContentModel):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
         """
         If override_url was given, use that.
@@ -189,8 +189,8 @@ class Article(BaseContentModel):
         if self.override_url:
             return self.override_url
         if self.destination.is_blog:
-            return ('blog_entry_detail', [self.destination.slug, self.slug])
-        return ('article_detail', [self.slug])
+            return reverse('blog_entry_detail', args=[self.destination.slug, self.slug])
+        return reverse('article_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         """
@@ -241,7 +241,7 @@ class Article(BaseContentModel):
 class Sidebar(BaseSidebarContentModel):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="related_sidebars"
     )
 
@@ -249,7 +249,7 @@ class Sidebar(BaseSidebarContentModel):
 class Attachment(models.Model):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     filename = models.CharField(
         max_length=200,
@@ -276,25 +276,24 @@ class Brief(models.Model):
     sites = models.ManyToManyField(Site)
     tweet = models.BooleanField("Send to Twitter", default=False)
 
-    def __unicode__(self):
-        return unicode(self.pub_date)
+    def __str__(self):
+        return str(self.pub_date)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('brief_detail', [self.id])
+        return reverse('brief_detail', args=[self.id])
 
 
 class ArticleImage(ContentImage):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
 
 
 class SidebarImage(ContentImage):
     sidebar = models.ForeignKey(
         Sidebar,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
 
 

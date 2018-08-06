@@ -1,5 +1,16 @@
 # Tango Articles Change Log
 
+## 0.13.0
+* Django 2.0 and Python 3.x compatible
+* Removed comments dependency
+* Fixed get_absolute_url syntax
+* Formally require typogrify
+* Corrected and updated tests
+* Removed permalink references
+* Reduced dependency on tango-photos
+* Added migrations
+
+
 ## 0.12.2
 * Removed deprecated assignement_tag
 
