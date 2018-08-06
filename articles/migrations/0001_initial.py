@@ -40,7 +40,6 @@ class Migration(migrations.Migration):
                 ('endnote', models.TextField(blank=True, help_text='A short note after the body.', null=True)),
                 ('override_url', models.URLField(blank=True, help_text='If this story is actaully published elsewhere, give the URL.')),
                 ('publication', models.CharField(choices=[('Draft', 'Draft'), ('Proofed', 'Proofed'), ('Published', 'Published')], default='Published', max_length=32, verbose_name='Publication status')),
-                ('articles', models.ManyToManyField(blank=True, limit_choices_to={'publication': 'Published'}, related_name='_article_articles_+', to='articles.Article')),
                 ('author', models.ForeignKey(blank=True, help_text='If the author is on-staff, select their name.', limit_choices_to={'is_staff': True}, null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -193,4 +192,9 @@ class Migration(migrations.Migration):
             name='sites',
             field=models.ManyToManyField(default=[1], to='sites.Site'),
         ),
+        migrations.AddField(
+            model_name='article',
+            name='articles',
+            field=models.ManyToManyField(blank=True, limit_choices_to={'publication': 'Published'}, related_name='_article_articles_+', to='articles.Article')
+        )
     ]

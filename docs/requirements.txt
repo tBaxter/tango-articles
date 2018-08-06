@@ -1,4 +1,4 @@
 twitter>=1.17 # don't use python-twitter. No py3 support.
 tango-shared-core>=0.6
 tango-voting>=0.4.1
-tango-photos>=0.4.1
+tango-photos>=0.5.0
