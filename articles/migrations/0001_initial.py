@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('sites', '0002_alter_domain_unique'),
-        ('photos', '__first__'),
+        #('photos', '__first__'),
     ]
 
     operations = [

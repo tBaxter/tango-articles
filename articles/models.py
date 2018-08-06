@@ -241,7 +241,7 @@ class Article(BaseContentModel):
 class Sidebar(BaseSidebarContentModel):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="related_sidebars"
     )
 
@@ -249,7 +249,7 @@ class Sidebar(BaseSidebarContentModel):
 class Attachment(models.Model):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
     filename = models.CharField(
         max_length=200,
@@ -286,14 +286,14 @@ class Brief(models.Model):
 class ArticleImage(ContentImage):
     article = models.ForeignKey(
         Article,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
 
 
 class SidebarImage(ContentImage):
     sidebar = models.ForeignKey(
         Sidebar,
-        on_delete=models.PROTECT
+        on_delete=models.CASCADE
     )
 
 
