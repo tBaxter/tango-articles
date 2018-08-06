@@ -189,8 +189,8 @@ class Article(BaseContentModel):
         if self.override_url:
             return self.override_url
         if self.destination.is_blog:
-            return reverse('blog_entry_detail', [self.destination.slug, self.slug])
-        return reverse('article_detail', [self.slug])
+            return reverse('blog_entry_detail', args=[self.destination.slug, self.slug])
+        return reverse('article_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
         """
@@ -280,7 +280,7 @@ class Brief(models.Model):
         return str(self.pub_date)
 
     def get_absolute_url(self):
-        return reverse('brief_detail', [self.id])
+        return reverse('brief_detail', args=[self.id])
 
 
 class ArticleImage(ContentImage):
