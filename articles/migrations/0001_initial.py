@@ -58,7 +58,6 @@ class Migration(migrations.Migration):
                 ('order', models.IntegerField(blank=True, help_text='For manual sorting.', null=True)),
                 ('thumb', models.CharField(blank=True, editable=False, max_length=200, null=True)),
                 ('is_vertical', models.BooleanField(default=False, editable=False)),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='articles.Article')),
             ],
             options={
                 'abstract': False,
@@ -72,7 +71,6 @@ class Migration(migrations.Migration):
                 ('filename', models.CharField(blank=True, help_text='The visible name of the attachment', max_length=200)),
                 ('attachment', models.FileField(upload_to='attachments/articles/')),
                 ('filetype', models.CharField(editable=False, max_length=4)),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='articles.Article')),
             ],
         ),
         migrations.CreateModel(
@@ -143,7 +141,7 @@ class Migration(migrations.Migration):
                 ('text_formatted', models.TextField(blank=True, editable=False, null=True)),
                 ('is_sidebar', models.BooleanField(default=False)),
                 ('image', models.ImageField(blank=True, null=True, upload_to=tango_shared.models.set_img_path)),
-                ('article', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='related_sidebars', to='articles.Article')),
+                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='related_sidebars', to='articles.Article')),
             ],
             options={
                 'abstract': False,
@@ -195,6 +193,27 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='articles',
-            field=models.ManyToManyField(blank=True, limit_choices_to={'publication': 'Published'}, related_name='_article_articles_+', to='articles.Article')
-        )
+            field=models.ManyToManyField(
+                blank=True, 
+                limit_choices_to={'publication': 'Published'}, 
+                related_name='_article_articles_+', 
+                to='articles.Article'
+            )
+        ),
+        migrations.AddField(
+            model_name='articleImage',
+            name='article',
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, 
+                to='articles.Article'
+            )
+        ),
+        migrations.AddField(
+            model_name='attachment',
+            name='article',
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, 
+                to='articles.Article'
+            )
+        ),
     ]
