@@ -3,4 +3,5 @@ tango-shared-core>=1.4
 tango-voting>=0.4.1
 tango-photos>=0.5.0
 typogrify>=2.0.0
+jinja2 # required for typogrify. Can remove with tango-shared update
 
