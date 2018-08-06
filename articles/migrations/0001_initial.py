@@ -6,20 +6,20 @@ import django.db.models.deletion
 import easy_thumbnails.fields
 import tango_shared.models
 
-dependencies = [
+dependency_list = [
     migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ('sites', '0002_alter_domain_unique'),
 ]
 
 if 'photos' in settings.INSTALLED_APPS:
-    dependencies.append(('photos', '__first__'))
+    dependency_list.append(('photos', '__first__'))
 
 
 class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies
+    dependencies = dependency_list
 
     operations = [
         migrations.CreateModel(
