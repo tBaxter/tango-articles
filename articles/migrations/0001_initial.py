@@ -6,16 +6,20 @@ import django.db.models.deletion
 import easy_thumbnails.fields
 import tango_shared.models
 
+dependencies = [
+    migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ('sites', '0002_alter_domain_unique'),
+]
+
+if 'photos' in settings.INSTALLED_APPS:
+    dependencies.append(('photos', '__first__'))
+
 
 class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('sites', '0002_alter_domain_unique'),
-        #('photos', '__first__'),
-    ]
+    dependencies
 
     operations = [
         migrations.CreateModel(
@@ -177,11 +181,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='article',
-            name='galleries',
-            field=models.ManyToManyField(blank=True, related_name='article_galleries', to='photos.Gallery'),
-        ),
-        migrations.AddField(
-            model_name='article',
             name='sections',
             field=models.ManyToManyField(blank=True, to='articles.Category'),
         ),
@@ -217,3 +216,12 @@ class Migration(migrations.Migration):
             )
         ),
     ]
+
+    if 'photos' in settings.INSTALLED_APPS:
+        operations.append(
+            migrations.AddField(
+                model_name='article',
+                name='galleries',
+                field=models.ManyToManyField(blank=True, related_name='article_galleries', to='photos.Gallery'),
+            )
+        )
